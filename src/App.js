@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Blockchain UI
+          Blockchain UI Designing
         </a>
       </header>
     </div>
