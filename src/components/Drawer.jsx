@@ -3,26 +3,33 @@ import Toolbar from '@mui/material/Toolbar';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
 
-// assets
-import More from '../assets/images/More.png';
-import Documents from '../assets/images/Documents.png';
-import Governance from '../assets/images/Governance.png';
-import Pools from '../assets/images/Pools.png';
-import Statistics from '../assets/images/Statistics.png';
-import Tournaments from '../assets/images/Tournaments.png';
-import Wallet from '../assets/images/Wallet.png';
+// icons
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
-export default function CustomDrawer({ children }) {
+// data
+import { DrawerList } from '../data/DrawerList';
+
+export default function CustomDrawer() {    
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
     return (
         <>
             <Drawer
                 sx={{
-                    width: 200,
+                    width: '100%',
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
                         background: 'transparent',
-                        width: 200,
+                        width: 225,
                         boxShadow: 0,
                         border: 0
                     },
@@ -33,34 +40,44 @@ export default function CustomDrawer({ children }) {
                 <Toolbar />
                 <Toolbar />
                     <List sx={{color: '#ACB2CF', fontSize: '15px', fontFamily: 'Sans-serif', fontWeight: 'bold'}}>
-                        <ListItem>
-                            <img src={Tournaments} alt="Tournaments" />
-                            &nbsp;&nbsp;Tournaments
-                        </ListItem>
-                        <ListItem>
-                            <img src={Statistics} alt="Statistics" />
-                            &nbsp;&nbsp;Statistics
-                        </ListItem>
-                        <ListItem>
-                            <img src={Pools} alt="Pools" />
-                            &nbsp;&nbsp;Pools
-                        </ListItem>
-                        <ListItem>
-                            <img src={Wallet} alt="Wallet" />
-                            &nbsp;&nbsp;Wallet
-                        </ListItem>
-                        <ListItem>
-                            <img src={Governance} alt="Governance" />
-                            &nbsp;&nbsp;Governance
-                        </ListItem>
-                        <ListItem>
-                            <img src={Documents} alt="Documents" />
-                            &nbsp;&nbsp;Documents
-                        </ListItem>
-                        <ListItem>
-                            <img src={More} alt="More" />
-                            &nbsp;&nbsp;More
-                        </ListItem>
+                        {DrawerList.map((item) => {
+                            return (
+                                <>
+                                    {item.children
+                                        ? <>
+                                            <ListItemButton onClick={handleClick}>
+                                                <img src={item.src} alt={item.title} />&nbsp;&nbsp;
+                                                <ListItemText primary={item.title} sx={{fontWeight: open?'bold':'normal'}} />
+                                                {open ? <ExpandLess /> : <ExpandMore />}
+                                            </ListItemButton>
+                                            <Collapse in={open} timeout="auto" unmountOnExit>
+                                                <List component="div" disablePadding>
+                                                    {item.children.map((child) => {
+                                                        return (
+                                                            <ListItemButton 
+                                                                sx={{ 
+                                                                    pl: 5.7, 
+                                                                    fontWeight: 'normal', 
+                                                                    fontSize: '14px'
+                                                                }}
+                                                            >
+                                                                {child}
+                                                            </ListItemButton>
+                                                        )
+                                                    })}
+                                                </List>
+                                            </Collapse>
+                                        </>
+                                        : <>
+                                            <ListItem>
+                                                <img src={item.src} alt={item.title} />
+                                                &nbsp;&nbsp;{item.title}
+                                            </ListItem>
+                                        </>
+                                    }
+                                </>
+                            )
+                        })}
                     </List>
             </Drawer>
         </>

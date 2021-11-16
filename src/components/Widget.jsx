@@ -4,67 +4,35 @@ import Grid from "@mui/material/Grid";
 // utils
 import Typography from '../utils/Typography';
 
-const widgetList = [
-    {
-        title: "10M",
-        rate: "10,050,489 TENKA",
-        price: "$5,025,247",
-        description: "Total Tenka supply"
-    },
-    {
-        title: "10M",
-        rate: "10,050,489 TENKA",
-        price: "$5,025,247",
-        description: "Total Tenka supply"
-    },
-    {
-        title: "10M",
-        rate: "10,050,489 TENKA",
-        price: "$5,025,247",
-        description: "Total Tenka supply"
-    },
-    {
-        title: "10M",
-        rate: "10,050,489 TENKA",
-        price: "$5,025,247",
-        description: "Total Tenka supply"
-    },
-    {
-        title: "10M",
-        rate: "10,050,489 TENKA",
-        price: "$5,025,247",
-        description: "Total Tenka supply"
-    },
-]
-
-export default function Widget() {
+export default function Widget({ dataList }) {
     return (
         <>
             <Grid container item xs={12}>
-                {widgetList.map((item) => {
+                {dataList.map((item) => {
                     return (
                         <>
                             <Grid
                                 item 
                                 sx={{
+                                    width: '13em',
                                     color: '#ffffff', 
                                     backgroundColor: '#17181E', 
                                     borderRadius: '8px',
                                     padding: 4,
-                                    marginTop: 2,
-                                    marginRight: 1
+                                    marginTop: 1,
+                                    marginRight: 2
                                 }}
                             >
-                                <Typography fontSize="25px" align="center">
+                                <Typography fontSize="25px" align="center" sx={{lineHeight: 2}}>
                                     {item.title}
                                 </Typography>
-                                <Typography fontSize="15px" align="center" color="#ACB2CF80"> 
+                                <Typography fontSize="15px" align="center" color="#ACB2CF80" sx={{lineHeight: 1}}> 
                                     {item.rate}
                                 </Typography>
-                                <Typography fontSize="15px" align="center">
+                                <Typography fontSize="15px" align="center" sx={{lineHeight: 2}}>
                                     {item.price}
                                 </Typography>
-                                <Typography fontSize="13px" align="center">
+                                <Typography fontSize="13px" align="center" sx={{marginTop: 1}}>
                                     {item.description}
                                 </Typography>
                             </Grid>

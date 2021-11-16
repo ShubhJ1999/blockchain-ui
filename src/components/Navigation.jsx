@@ -1,6 +1,4 @@
 import React from 'react';
-
-// apis
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,7 +20,7 @@ export default function Navigation() {
         <>
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar 
-                    position="static" 
+                    position="fixed" 
                     sx={{background: 'transparent', boxShadow: 0}}
                 >
                     <Toolbar>
